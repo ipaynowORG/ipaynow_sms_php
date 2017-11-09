@@ -9,20 +9,18 @@ require_once '../conf/Config.php';
  */
 class DESUtil
 {
-    public static function encrypt($data){
+    public static function encrypt($desKey,$data){
         $cipher=MCRYPT_3DES;
         $mode=MCRYPT_MODE_ECB;
-        $desKey = Config::$des_key;
         if (strlen($desKey) > 24){
             $desKey = substr($desKey,0,24);
         }
         return mcrypt_encrypt($cipher,$desKey,$data,$mode);
     }
 
-    public static function decrypt($data){
+    public static function decrypt($desKey,$data){
         $cipher=MCRYPT_3DES;
         $mode=MCRYPT_MODE_ECB;
-        $desKey = Config::$des_key;
         if (strlen($desKey) > 24){
             $desKey = substr($desKey,0,24);
         }
