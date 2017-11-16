@@ -11,17 +11,11 @@ class Config
     static $timezone = "Asia/Shanghai";
 
 
-    //测试环境
-//        static $app_id="1476788813528909";//该处配置您的APPID
-//        static $md5_key="c4MlX9GJCi0YI5z3RvpK17wPlscFKpY1";//该处配置您的应用秘钥
-//        static $trans_url="https://dby.ipaynow.cn/sms";
-
-
-//        static $des_key="hSbw2SwTFasdSdddnyS3sijvarq";//该处配置您的DES秘钥 hSbw2SwTFasdSdddnyS3sijvarq
     static $app_id = "xxxxxxxxxxxx";//该处配置您的APPID
     static $md5_key = "xxxxxxxxxxxxxx";//该处配置您的应用秘钥
-    static $des_key = "xxxxxxxxxxxxxxxxxx";//该处配置您的DES秘钥 hSbw2SwTFasdSdddnyS3sijvarq
-    static $trans_url = "https://sms.ipaynow.cn";
+    static $des_key = "xxxxxxxxxxxxxxxxxx";//该处配置您的DES秘钥
+    static $pro_url = "https://sms.ipaynow.cn";//生产url
+    static $test_url = "https://dby.ipaynow.cn/sms";//测试url
 
     const VERIFY_HTTPS_CERT = false;
     const CHECK_FUNCODE = "S01"; //行业短信

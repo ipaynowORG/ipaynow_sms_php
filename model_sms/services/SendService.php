@@ -15,9 +15,10 @@ class SendService
      * @param $mobile 手机号
      * @param $content 短息内容
      * @param $notifyUrl 后台通知地址
+     * @param $isTest 是否测试 true测试，false生产
      * @return bool|string
      */
-    public static function industryMessage($mhtOrderNo, $mobile, $content, $notifyUrl)
+    public static function industryMessage($mhtOrderNo, $mobile, $content, $notifyUrl,$isTest=true)
     {
         $req = array();
         $req["funcode"] = config::CHECK_FUNCODE;
@@ -26,7 +27,7 @@ class SendService
         $req["mobile"] = $mobile;
         $req["content"] = $content;
         $req["notifyUrl"] = $notifyUrl;
-        return self::buildAndSendCheckReq($req);
+        return self::buildAndSendCheckReq($req,$isTest);
     }
 
     /**
@@ -35,9 +36,10 @@ class SendService
      * @param $mobile 手机号
      * @param $content 短息内容
      * @param $notifyUrl 后台通知地址
+     * @param $isTest 是否测试 true测试，false生产
      * @return bool|string
      */
-    public static function salesMessage($mhtOrderNo, $mobile, $content, $notifyUrl)
+    public static function salesMessage($mhtOrderNo, $mobile, $content, $notifyUrl,$isTest)
     {
         $req = array();
         $req["funcode"] = config::YX_01_FUNCODE;
@@ -46,7 +48,7 @@ class SendService
         $req["mobile"] = $mobile;
         $req["content"] = $content;
         $req["notifyUrl"] = $notifyUrl;
-        return self::buildAndSendCheckReq($req);
+        return self::buildAndSendCheckReq($req,$isTest);
     }
 
     /**
@@ -54,23 +56,24 @@ class SendService
      * @param $notifyUrl
      * @return bool|string
      */
-    public static function batchMessage($contents, $notifyUrl)
+    public static function batchMessage($contents, $notifyUrl,$isTest)
     {
         $req = array();
         $req["funcode"] = config::BATCH_FUNCODE;
         $req["appId"] = config::$app_id;
         $req["contents"] = $contents;
         $req["notifyUrl"] = $notifyUrl;
-        return self::buildAndSendCheckReq($req);
+        return self::buildAndSendCheckReq($req,$isTest);
     }
 
     /**
      * 订单查询
      * @param $nowPayOrderNo 现在支付订单号
      * @param $mobile 手机号
+     * @param $isTest 是否测试 true测试，false生产
      * @return bool|string  tradeStatus(A00H 处理中, A001-推送成功，A002-推送失败)
      */
-    public static function queryMessage($nowPayOrderNo, $mobile)
+    public static function queryMessage($nowPayOrderNo, $mobile,$isTest=true)
     {
         $req = array();
         $req["funcode"] = config::SMS_QUERY_FUNCODE;
@@ -80,28 +83,32 @@ class SendService
         /**
          * appId=150753086263684&funcode=SMS_QUERY&mhtOrderNo=sales2&responseCode=00&responseMsg=success&responseTime=20171109114903&tradeStatus=A001&transTime=2017-11-09 11:14:17
          */
-        return self::buildAndSendQueryReq($req);
+        return self::buildAndSendQueryReq($req,$isTest);
     }
 
 
-    public static function buildAndSendCheckReq(Array $req)
+    public static function buildAndSendCheckReq(Array $req,$isTest)
     {
         $req_content = self::buildReqTemplate($req["funcode"], $req);
         echo "请求报文：" . $req_content;
         echo "\n";
-        $resp_content = NetUtil::sendMessage($req_content, Config::$trans_url);
+        if ($isTest){
+            $url = Config::$test_url;
+        }else $url = Config::$pro_url;
+        $resp_content = NetUtil::sendMessage($req_content, $url);
         echo "\n";
         echo "应答报文：" . $resp_content;
         return Self::parseResp($resp_content);
     }
 
-    public static function buildAndSendQueryReq(Array $req)
+    public static function buildAndSendQueryReq(Array $req,$isTest)
     {
         $req_content = Tools::createLinkString($req, true, false);
         $req_content = $req_content . "&mchSign=" . md5($req_content . '&' . Config::$md5_key);
-        print "req_content : " . $req_content;
-        //Log::outLog("查询接口请求:",$req_content);
-        $resp_content = NetUtil::sendMessage($req_content, Config::$trans_url);
+        if ($isTest){
+            $url = Config::$test_url;
+        }else $url = Config::$pro_url;
+        $resp_content = NetUtil::sendMessage($req_content, $url);
         print "\nresp : " . $resp_content;
         //Log::outLog("查询接口应答:",$resp_content);
         return Self::parseResp($resp_content);

@@ -55,9 +55,10 @@
              * @param $mobile 手机号
              * @param $content 短息内容
              * @param $notifyUrl 后台通知地址
+             * @param $isTest 是否测试 true测试，false生产
              * @return bool|string
              */
-            public static function industryMessage($mhtOrderNo, $mobile, $content, $notifyUrl)
+            public static function industryMessage($mhtOrderNo, $mobile, $content, $notifyUrl,$isTest)
 
 <h5 id='2.1.2'></h4>
 
@@ -69,9 +70,10 @@
                 * @param $mobile 手机号
                 * @param $content 短息内容 (内容请加“回复TD退订”)
                 * @param $notifyUrl 后台通知地址
+                * @param $isTest 是否测试 true测试，false生产 
                 * @return bool|string
                 */
-               public static function salesMessage($mhtOrderNo, $mobile, $content, $notifyUrl)
+               public static function salesMessage($mhtOrderNo, $mobile, $content, $notifyUrl,$isTest)
 
 
 <h4 id='2.2'>2.2 接受通知(状态报告)</h4>
@@ -147,9 +149,10 @@
                 * 订单查询
                 * @param $nowPayOrderNo 现在支付订单号
                 * @param $mobile 手机号
+                * @param $isTest 是否测试 true测试，false生产
                 * @return bool|string  tradeStatus(A00H 处理中, A001-推送成功，A002-推送失败)
                 */
-               public static function queryMessage($nowPayOrderNo, $mobile)
+               public static function queryMessage($nowPayOrderNo, $mobile,$isTest)
 
 <h2 id='3'> 3. DEMO </h2>
     SendTest.php
