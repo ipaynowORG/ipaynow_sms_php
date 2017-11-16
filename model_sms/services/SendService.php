@@ -116,10 +116,12 @@ class SendService
         echo "第一部分：" . $message_data_one;
         echo "\n";
         $message_data_two = base64_encode(DESUtil::encrypt(Config::$des_key, $original_text));
-        echo "第二部分明文：" . $original_text;
+        echo "第二部分：" . $message_data_two;
         echo "\n";
+        echo "contetn :" .$original_text . '&' . Config::$md5_key;
+        echo "md5 : ".md5($original_text . '&' . Config::$md5_key);
         $message_data_three = base64_encode(md5($original_text . '&' . Config::$md5_key));
-        echo "第三部分：" . $message_data_three;
+        echo "\n第三部分：" . $message_data_three;
         echo "\n";
         $message = urlencode($message_data_one . '|' . $message_data_two . '|' . $message_data_three);
 

@@ -36,8 +36,7 @@
 
 <h4 id='1.2'> 1.2 如何获取 </h4>
 
-[获取源码](git@github.com:ipaynowORG/ipaynow_sms_php.git)
-
+[获取源码](https://github.com/ipaynowORG/ipaynow_sms_php.git)
 
 
 <h2 id='2'> 2. API </h2>
@@ -162,10 +161,10 @@
     require_once '../services/BatchMessageTemplet.php';
     
     //营销
-    //print SendService::salesMessage("sales2","17701087752","营销短信测试","www.baidu.com");
+    //print SendService::salesMessage("sales2","1333333333","营销短信测试","www.baidu.com");
     //行业短信
-    //print SendService::industryMessage("industry2","17701087752","php 行业短信测试","www.baidu.com");
+    //print SendService::industryMessage("industry2","13333333333","php 行业短信测试","www.baidu.com");
     
     //查询
-    print SendService::queryMessage("400001201711091114172180249","17701087752");
+    print SendService::queryMessage("400001201711091114172180249","13333333333");
 ```

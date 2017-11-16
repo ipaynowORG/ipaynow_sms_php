@@ -18,11 +18,10 @@ class Config
 
 
 //        static $des_key="hSbw2SwTFasdSdddnyS3sijvarq";//该处配置您的DES秘钥 hSbw2SwTFasdSdddnyS3sijvarq
-    static $app_id = "150753086263684";//该处配置您的APPID
-    static $md5_key = "zHGKLmQaU9PLMEGObyubsV5uhDAeYVqQ";//该处配置您的应用秘钥
-    static $des_key = "w75zriHtT85zpCYW3y8Dpw2k";//该处配置您的DES秘钥 hSbw2SwTFasdSdddnyS3sijvarq
+    static $app_id = "xxxxxxxxxxxx";//该处配置您的APPID
+    static $md5_key = "xxxxxxxxxxxxxx";//该处配置您的应用秘钥
+    static $des_key = "xxxxxxxxxxxxxxxxxx";//该处配置您的DES秘钥 hSbw2SwTFasdSdddnyS3sijvarq
     static $trans_url = "https://sms.ipaynow.cn";
-    static $query_url = "http://192.168.1.92:10800";
 
     const VERIFY_HTTPS_CERT = false;
     const CHECK_FUNCODE = "S01"; //行业短信
